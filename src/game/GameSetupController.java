@@ -26,7 +26,7 @@ public class GameSetupController {
         Scene gameViewScene = new Scene(gameViewParent);
 
         GameViewController c = loader.getController();
-        c.initData(p1Name.getText(), p2Name.getText());
+        c.init(p1Name.getText(), p2Name.getText());
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(gameViewScene);
