@@ -39,5 +39,24 @@
                 </VBox>
             </children>
         </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="currentPlayerLabel" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Current Score" underline="true" />
+                  <Label fx:id="currentPlayerTurnScore" text="label">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
     </children>
 </VBox>

@@ -2,23 +2,20 @@ package game;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class GameViewController implements Initializable {
-    Player playerOne;
-    Player playerTwo;
+public class GameViewController {
+    private Player playerOne;
+    private Player playerTwo;
+    private int currentTurnScore = 0;
+    private Player currentPlayer;
 
     @FXML private Label playerOneNameLabel;
-
     @FXML private Label playerOneScoreLabel;
-
     @FXML private Label playerTwoNameLabel;
-
     @FXML private Label playerTwoScoreLabel;
+    @FXML private Label currentPlayerLabel;
+    @FXML private Label currentPlayerTurnScore;
 
     public void initData(String playerOneName, String playerTwoName) {
         playerOne = new Player(playerOneName, 0);
@@ -33,8 +30,12 @@ public class GameViewController implements Initializable {
         playerTwoScoreLabel
                 .textProperty()
                 .bind(new SimpleStringProperty(Integer.toString(playerTwo.getScore())));
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+        currentPlayerTurnScore
+                .textProperty()
+                .bind(new SimpleStringProperty(Integer.toString(currentTurnScore)));
+
+        currentPlayer = playerOne;
+        currentPlayerLabel.setText(currentPlayer.getName());
+    }
 }
