@@ -20,7 +20,7 @@ public class GameViewController {
     private Player playerTwo;
     private int currentTurnScore = 0;
     private Player currentPlayer;
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     @FXML private Label playerOneNameLabel;
     @FXML private Label playerOneScoreLabel;
@@ -51,7 +51,7 @@ public class GameViewController {
     /**
      * save current round score to current player total and switch players
      *
-     * @param event
+     * @param event - button click event info
      */
     @FXML
     void bankScore(ActionEvent event) {
@@ -64,7 +64,7 @@ public class GameViewController {
     /**
      * take current player turn roll die, update turn score, check game status, and change player
      *
-     * @param event
+     * @param event - button click event info
      */
     @FXML
     void rollDie(ActionEvent event) {
@@ -76,7 +76,7 @@ public class GameViewController {
         // if 100 or greater save game results and return to dashboard
         if (checkGameStatus()) {
             saveResults();
-            loadDashBoard(event);
+            loadWinnerScene(event);
         }
 
         if (rollNumber == 1) changePlayer();
@@ -98,7 +98,7 @@ public class GameViewController {
      *
      * @param event - current javafx event information
      */
-    private void loadDashBoard(ActionEvent event) {
+    private void loadWinnerScene(ActionEvent event) {
         Parent dashboardViewParent = null;
         try {
             dashboardViewParent = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
@@ -158,7 +158,7 @@ public class GameViewController {
     /**
      * update player score label
      *
-     * @param player
+     * @param player - player whose score is to be updated
      */
     private void updatePlayerScoreboard(Player player) {
         if (player.getName().equals(playerOne.getName())) {
