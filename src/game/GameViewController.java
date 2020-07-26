@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +27,8 @@ public class GameViewController {
     @FXML private Label playerTwoScoreLabel;
     @FXML private Label currentPlayerLabel;
     @FXML private Label currentPlayerTurnScore;
-    @FXML private Button rollBTN;
-    @FXML private Button scoreBankBTN;
+    //    @FXML private Button rollBTN;
+    //    @FXML private Button scoreBankBTN;
     @FXML private ImageView dieImageView;
 
     public void init(String playerOneName, String playerTwoName) {
@@ -48,13 +47,9 @@ public class GameViewController {
         currentPlayerLabel.setText(currentPlayer.getName());
     }
 
-    /**
-     * save current round score to current player total and switch players
-     *
-     * @param event - button click event info
-     */
+    /** save current round score to current player total and switch players */
     @FXML
-    void bankScore(ActionEvent event) {
+    void bankScore() {
         currentPlayer.score += currentTurnScore;
         updatePlayerScoreboard(currentPlayer);
         updateCurrentTurnScore(0, "reset");
@@ -67,7 +62,7 @@ public class GameViewController {
      * @param event - button click event info
      */
     @FXML
-    void rollDie(ActionEvent event) {
+    void rollDie(ActionEvent event) throws IOException {
         int rollNumber = rand.nextInt(6) + 1;
         changeDieFace(new Image(rollNumber + ".png"));
         updateCurrentTurnScore(rollNumber, "update");
@@ -75,6 +70,7 @@ public class GameViewController {
         // check current score status.
         // if 100 or greater save game results and return to dashboard
         if (checkGameStatus()) {
+            currentPlayer.score += currentTurnScore;
             saveResults();
             loadWinnerScene(event);
         }
@@ -94,21 +90,22 @@ public class GameViewController {
     }
 
     /**
-     * load dashboard scene
+     * load winner view
      *
      * @param event - current javafx event information
      */
-    private void loadWinnerScene(ActionEvent event) {
-        Parent dashboardViewParent = null;
-        try {
-            dashboardViewParent = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert dashboardViewParent != null;
-        Scene dashboardViewScene = new Scene(dashboardViewParent);
+    private void loadWinnerScene(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("winnerView.fxml"));
+        Parent winnerViewParent = loader.load();
+
+        Scene winnerViewScene = new Scene(winnerViewParent);
+
+        WinnerViewController c = loader.getController();
+        c.initData(currentPlayer);
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(dashboardViewScene);
+        window.setScene(winnerViewScene);
         window.show();
     }
 

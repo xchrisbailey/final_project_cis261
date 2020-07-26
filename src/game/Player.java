@@ -9,6 +9,11 @@ public class Player {
         this.score = score;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" + "name='" + name + '\'' + ", score=" + score + '}';
+    }
+
     public String getName() {
         return name;
     }
