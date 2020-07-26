@@ -2,11 +2,17 @@ package game;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class GameViewController {
@@ -42,18 +48,68 @@ public class GameViewController {
         currentPlayerLabel.setText(currentPlayer.getName());
     }
 
+    /**
+     * save current round score to current player total and switch players
+     *
+     * @param event
+     */
     @FXML
     void bankScore(ActionEvent event) {
-        // add score to player total
-        System.out.println("score banking");
+        currentPlayer.score += currentTurnScore;
+        updatePlayerScoreboard(currentPlayer);
+        updateCurrentTurnScore(0, "reset");
+        changePlayer();
     }
 
+    /**
+     * take current player turn roll die, update turn score, check game status, and change player
+     *
+     * @param event
+     */
     @FXML
     void rollDie(ActionEvent event) {
         int rollNumber = rand.nextInt(6) + 1;
         changeDieFace(new Image(rollNumber + ".png"));
-        updateCurrentTurnScore(rollNumber);
+        updateCurrentTurnScore(rollNumber, "update");
+
+        // check current score status.
+        // if 100 or greater save game results and return to dashboard
+        if (checkGameStatus()) {
+            saveResults();
+            loadDashBoard(event);
+        }
+
         if (rollNumber == 1) changePlayer();
+    }
+
+    /** check current game status */
+    private boolean checkGameStatus() {
+        return currentPlayer.score + currentTurnScore >= 100;
+    }
+
+    /** save current game results to log */
+    private void saveResults() {
+        Result gameResult = new Result(playerOne, playerTwo);
+        gameResult.save();
+    }
+
+    /**
+     * load dashboard scene
+     *
+     * @param event - current javafx event information
+     */
+    private void loadDashBoard(ActionEvent event) {
+        Parent dashboardViewParent = null;
+        try {
+            dashboardViewParent = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert dashboardViewParent != null;
+        Scene dashboardViewScene = new Scene(dashboardViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(dashboardViewScene);
+        window.show();
     }
 
     /**
@@ -70,11 +126,19 @@ public class GameViewController {
      *
      * @param amount - current roll amount to be added or reset score from
      */
-    private void updateCurrentTurnScore(int amount) {
-        if (amount == 1) {
-            currentTurnScore = 0;
-        } else {
-            currentTurnScore += amount;
+    private void updateCurrentTurnScore(int amount, String action) {
+
+        switch (action) {
+            case "reset":
+                currentTurnScore = amount;
+                break;
+            case "update":
+                if (amount == 1) {
+                    currentTurnScore = 0;
+                } else {
+                    currentTurnScore += amount;
+                }
+                break;
         }
 
         currentPlayerTurnScore.setText(Integer.toString(currentTurnScore));
@@ -89,5 +153,18 @@ public class GameViewController {
         }
 
         currentPlayerLabel.setText(currentPlayer.getName());
+    }
+
+    /**
+     * update player score label
+     *
+     * @param player
+     */
+    private void updatePlayerScoreboard(Player player) {
+        if (player.getName().equals(playerOne.getName())) {
+            playerOneScoreLabel.setText(Integer.toString(player.getScore()));
+        } else {
+            playerTwoScoreLabel.setText(Integer.toString(player.getScore()));
+        }
     }
 }
