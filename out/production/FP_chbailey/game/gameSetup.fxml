@@ -13,7 +13,7 @@
          <children>
             <Label contentDisplay="RIGHT" text="Player One Name">
                <graphic>
-                  <TextField fx:id="p1Name" />
+                  <TextField fx:id="p1Name" promptText="Player One Name" />
                </graphic>
             </Label>
          </children>
@@ -22,7 +22,7 @@
          <children>
             <Label contentDisplay="RIGHT" text="Player Two Name">
                <graphic>
-                  <TextField fx:id="p2Name" />
+                  <TextField fx:id="p2Name" promptText="Player Two Name" />
                </graphic>
             </Label>
          </children>

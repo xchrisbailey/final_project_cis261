@@ -2,13 +2,14 @@ package game;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Result implements Serializable {
-    LocalDateTime timestamp = LocalDateTime.now();
-    String playerOneName;
-    String playerTwoName;
-    int playerOneScore;
-    int playerTwoScore;
+    private final String timestamp;
+    private final String playerOneName;
+    private final String playerTwoName;
+    private final int playerOneScore;
+    private final int playerTwoScore;
 
     @Override
     public String toString() {
@@ -29,9 +30,31 @@ public class Result implements Serializable {
     }
 
     public Result(Player playerOne, Player playerTwo) {
+        this.timestamp =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.playerOneName = playerOne.getName();
         this.playerOneScore = playerOne.getScore();
         this.playerTwoName = playerTwo.getName();
         this.playerTwoScore = playerTwo.getScore();
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public String getPlayerOneName() {
+        return playerOneName;
+    }
+
+    public String getPlayerTwoName() {
+        return playerTwoName;
+    }
+
+    public int getPlayerOneScore() {
+        return playerOneScore;
+    }
+
+    public int getPlayerTwoScore() {
+        return playerTwoScore;
     }
 }
