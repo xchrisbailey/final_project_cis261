@@ -2,19 +2,14 @@ package game;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Random;
 
-public class GameViewController {
+public class GameViewController extends SceneLoader {
     private Player playerOne;
     private Player playerTwo;
     private int currentTurnScore = 0;
@@ -57,10 +52,10 @@ public class GameViewController {
     /**
      * take current player turn roll die, update turn score, check game status, and change player
      *
-     * @param event - button click event info
+     * @param e - button click event info
      */
     @FXML
-    void rollDie(ActionEvent event) throws IOException {
+    void rollDie(ActionEvent e) throws IOException {
         int rollNumber = rand.nextInt(6) + 1;
         changeDieFace(new Image(rollNumber + ".png"));
         updateCurrentTurnScore(rollNumber, "update");
@@ -70,7 +65,7 @@ public class GameViewController {
         if (checkGameStatus()) {
             currentPlayer.score += currentTurnScore;
             saveResults();
-            loadWinnerScene(event);
+            loadScene(e, "winnerView.fxml", currentPlayer); // load winner scene
         }
 
         if (rollNumber == 1) changePlayer();
@@ -84,27 +79,7 @@ public class GameViewController {
     /** save current game results to log */
     private void saveResults() {
         Result gameResult = new Result(playerOne, playerTwo);
-        writeToLogFile(gameResult);
-    }
-
-    /**
-     * load winner view
-     *
-     * @param event - current javafx event information
-     */
-    private void loadWinnerScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("winnerView.fxml"));
-        Parent winnerViewParent = loader.load();
-
-        Scene winnerViewScene = new Scene(winnerViewParent);
-
-        WinnerViewController c = loader.getController();
-        c.initData(currentPlayer);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(winnerViewScene);
-        window.show();
+        WriteLog.save(gameResult);
     }
 
     /**
@@ -160,46 +135,6 @@ public class GameViewController {
             playerOneScoreLabel.setText(Integer.toString(player.getScore()));
         } else {
             playerTwoScoreLabel.setText(Integer.toString(player.getScore()));
-        }
-    }
-
-    /**
-     * Write current games results to log file
-     *
-     * @param results - player 1 and 2 game results
-     */
-    private void writeToLogFile(Result results) {
-        File logFile = new File("scoreHistory.dat");
-        boolean append = logFile.exists();
-        try (AppendableObjectOutputStream ao =
-                new AppendableObjectOutputStream(new FileOutputStream(logFile, append), append)) {
-            ao.writeObject(results);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** make object output stream files appendable (HACKY) */
-    private static class AppendableObjectOutputStream extends ObjectOutputStream {
-        private final boolean append;
-        private final boolean initialized;
-        private final DataOutputStream dout;
-
-        public AppendableObjectOutputStream(OutputStream out, boolean append) throws IOException {
-            super(out);
-            this.append = append;
-            this.initialized = true;
-            this.dout = new DataOutputStream(out);
-            this.writeStreamHeader();
-        }
-
-        @Override
-        protected void writeStreamHeader() throws IOException {
-            if (!this.initialized || this.append) return;
-            if (dout != null) {
-                dout.writeShort(STREAM_MAGIC);
-                dout.writeShort(STREAM_VERSION);
-            }
         }
     }
 }

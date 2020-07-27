@@ -2,17 +2,12 @@ package game;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WinnerViewController {
+public class WinnerViewController extends SceneLoader {
 
     @FXML private Label winnerNameLabel;
 
@@ -35,10 +30,6 @@ public class WinnerViewController {
 
     @FXML
     private void loadDashboard(ActionEvent e) throws IOException {
-        Parent dashboardViewParent = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        Scene dashboardViewScene = new Scene(dashboardViewParent);
-        Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        window.setScene(dashboardViewScene);
-        window.show();
+        loadScene(e, "dashboard.fxml");
     }
 }

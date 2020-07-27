@@ -6,15 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -22,7 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class HistoryViewController {
+public class HistoryViewController extends SceneLoader {
     @FXML private TableView<Result> resultsTable;
     @FXML private TableColumn<Result, StringProperty> dateCol;
     @FXML private TableColumn<Result, StringProperty> playerOneNameCol;
@@ -33,9 +28,8 @@ public class HistoryViewController {
 
     @FXML
     public void initialize() {
-        ArrayList<Result> resultsArrayList = loadResultFile();
         ObservableList<Result> observableResults =
-                FXCollections.observableArrayList(resultsArrayList);
+                FXCollections.observableArrayList(loadResultFile());
 
         dateCol.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
         playerOneNameCol.setCellValueFactory(new PropertyValueFactory<>("playerOneName"));
@@ -67,10 +61,6 @@ public class HistoryViewController {
 
     @FXML
     private void loadDashboardView(ActionEvent e) throws IOException {
-        Parent dashboardViewParent = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        Scene dashboardViewScene = new Scene(dashboardViewParent);
-        Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        window.setScene(dashboardViewScene);
-        window.show();
+        loadScene(e, "dashboard.fxml");
     }
 }
