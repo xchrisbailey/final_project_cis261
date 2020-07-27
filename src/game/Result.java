@@ -1,15 +1,19 @@
 package game;
 
-public class Result {
-    Player playerOne;
-    Player playerTwo;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+public class Result implements Serializable {
+    LocalDateTime timestamp = LocalDateTime.now();
+    String playerOneName;
+    String playerTwoName;
+    int playerOneScore;
+    int playerTwoScore;
 
     public Result(Player playerOne, Player playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
-    }
-
-    public void save() {
-        System.out.println("save results to log file");
+        this.playerOneName = playerOne.getName();
+        this.playerOneScore = playerOne.getScore();
+        this.playerTwoName = playerTwo.getName();
+        this.playerTwoScore = playerTwo.getScore();
     }
 }

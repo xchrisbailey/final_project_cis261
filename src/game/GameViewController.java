@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 
 public class GameViewController {
@@ -67,6 +67,7 @@ public class GameViewController {
         changeDieFace(new Image(rollNumber + ".png"));
         updateCurrentTurnScore(rollNumber, "update");
 
+        saveResults();
         // check current score status.
         // if 100 or greater save game results and return to dashboard
         if (checkGameStatus()) {
@@ -86,7 +87,7 @@ public class GameViewController {
     /** save current game results to log */
     private void saveResults() {
         Result gameResult = new Result(playerOne, playerTwo);
-        gameResult.save();
+        writeToLogFile(gameResult);
     }
 
     /**
@@ -162,6 +163,46 @@ public class GameViewController {
             playerOneScoreLabel.setText(Integer.toString(player.getScore()));
         } else {
             playerTwoScoreLabel.setText(Integer.toString(player.getScore()));
+        }
+    }
+
+    /**
+     * Write current games results to log file
+     *
+     * @param results - player 1 and 2 game results
+     */
+    private void writeToLogFile(Result results) {
+        File logFile = new File("scoreHistory.dat");
+        boolean append = logFile.exists();
+
+        try (FileOutputStream fo = new FileOutputStream(logFile, append);
+                AppendableObjectOutputStream ao = new AppendableObjectOutputStream(fo, append)) {
+            ao.writeObject(results);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class AppendableObjectOutputStream extends ObjectOutputStream {
+        private final boolean append;
+        private final boolean initialized;
+        private final DataOutputStream dout;
+
+        public AppendableObjectOutputStream(OutputStream out, boolean append) throws IOException {
+            super(out);
+            this.append = append;
+            this.initialized = true;
+            this.dout = new DataOutputStream(out);
+            this.writeStreamHeader();
+        }
+
+        @Override
+        protected void writeStreamHeader() throws IOException {
+            if (!this.initialized || this.append) return;
+            if (dout != null) {
+                dout.writeShort(STREAM_MAGIC);
+                dout.writeShort(STREAM_VERSION);
+            }
         }
     }
 }
