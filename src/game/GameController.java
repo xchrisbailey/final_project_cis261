@@ -24,7 +24,13 @@ public class GameController extends SceneLoader {
     @FXML private Label currentPlayerTurnScore;
     @FXML private ImageView dieImageView;
 
-    public void init(String playerOneName, String playerTwoName) {
+    /**
+     * initial game data and board setup
+     *
+     * @param playerOneName - name of first player to create
+     * @param playerTwoName - name of second player to create
+     */
+    public void initData(String playerOneName, String playerTwoName) {
         playerOne = new Player(playerOneName, 0);
         playerTwo = new Player(playerTwoName, 0);
 
@@ -42,7 +48,7 @@ public class GameController extends SceneLoader {
 
     /** save current round score to current player total and switch players */
     @FXML
-    void bankScore() {
+    private void bankScore() {
         currentPlayer.score += currentTurnScore;
         updatePlayerScoreboard(currentPlayer);
         updateCurrentTurnScore(0, "reset");
@@ -57,7 +63,7 @@ public class GameController extends SceneLoader {
     @FXML
     void rollDie(ActionEvent e) throws IOException {
         int rollNumber = rand.nextInt(6) + 1;
-        changeDieFace(new Image(rollNumber + ".png"));
+        dieImageView.setImage(new Image(rollNumber + ".png"));
         updateCurrentTurnScore(rollNumber, "update");
 
         // check current score status.
@@ -80,15 +86,6 @@ public class GameController extends SceneLoader {
     private void saveResults() {
         Result gameResult = new Result(playerOne, playerTwo);
         WriteLog.save(gameResult);
-    }
-
-    /**
-     * change die face to new image
-     *
-     * @param dieUrl - Image of new die face
-     */
-    private void changeDieFace(Image dieUrl) {
-        dieImageView.setImage(dieUrl);
     }
 
     /**

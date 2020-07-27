@@ -9,7 +9,7 @@ public class DashboardController extends SceneLoader {
      * load game history scene
      *
      * @param e - current event
-     * @throws IOException
+     * @throws IOException - error catching for file loading
      */
     public void loadHistoryView(ActionEvent e) throws IOException {
         loadScene(e, "historyScreen.fxml");
@@ -19,7 +19,7 @@ public class DashboardController extends SceneLoader {
      * Load game setup scene
      *
      * @param e - current event
-     * @throws IOException
+     * @throws IOException - error catching for file loading
      */
     public void loadGameSetupView(ActionEvent e) throws IOException {
         loadScene(e, "gameSetupScreen.fxml");

@@ -25,8 +25,8 @@ public class GameSetupController extends SceneLoader {
     /**
      * Loads game screen and sends across player one and player two names
      *
-     * @param e
-     * @throws IOException
+     * @param e - current event
+     * @throws IOException - catch error loading scene
      */
     @FXML
     void loadGame(ActionEvent e) throws IOException {

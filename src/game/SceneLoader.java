@@ -15,7 +15,7 @@ public class SceneLoader {
      *
      * @param e - current event
      * @param fxmlFileName - filename of target fxml file
-     * @throws IOException
+     * @throws IOException - catch error loading scene file
      */
     public static void loadScene(ActionEvent e, String fxmlFileName) throws IOException {
         Parent viewParent = FXMLLoader.load(SceneLoader.class.getResource(fxmlFileName));
@@ -32,7 +32,7 @@ public class SceneLoader {
      * @param fxmlFileName - filename of target fxml file
      * @param p1Name - player one name
      * @param p2Name - player two name
-     * @throws IOException
+     * @throws IOException - catch error loading scene file
      */
     public static void loadScene(ActionEvent e, String fxmlFileName, String p1Name, String p2Name)
             throws IOException {
@@ -43,7 +43,7 @@ public class SceneLoader {
         Scene viewScene = new Scene(viewParent);
 
         GameController c = loader.getController();
-        c.init(p1Name, p2Name);
+        c.initData(p1Name, p2Name);
 
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
         window.setScene(viewScene);
@@ -56,7 +56,7 @@ public class SceneLoader {
      * @param e - current event
      * @param fxmlFileName - filename of target fxml file
      * @param winner - Player object of game winner
-     * @throws IOException
+     * @throws IOException - catch error loading scene file
      */
     public static void loadScene(ActionEvent e, String fxmlFileName, Player winner)
             throws IOException {
