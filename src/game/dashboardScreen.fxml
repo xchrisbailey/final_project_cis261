@@ -19,31 +19,25 @@
         <RowConstraints/>
         <RowConstraints/>
     </rowConstraints>
-    <children>
-        <VBox alignment="CENTER">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Of PIG" textAlignment="CENTER"
-                      wrappingWidth="640.21435546875">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Text>
-                <Button id="green" fx:id="new_game_btn" contentDisplay="TOP" mnemonicParsing="false"
-                        onAction="#loadGameSetupView" stylesheets="@styles.css" text="New Game">
-                    <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/pig.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <VBox.margin>
-                        <Insets bottom="20.0"/>
-                    </VBox.margin>
-                </Button>
-                <Button id="green" fx:id="show_history_btn" mnemonicParsing="false" onAction="#loadHistoryView"
-                        stylesheets="@styles.css" text="Score History"/>
-            </children>
-        </VBox>
-    </children>
+    <VBox alignment="CENTER">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Of PIG" textAlignment="CENTER"
+              wrappingWidth="640.21435546875">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Text>
+        <Button id="green" contentDisplay="TOP" mnemonicParsing="false"
+                onAction="#loadGameSetupView" stylesheets="@styles.css" text="New Game">
+            <graphic>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@images/pig.png"/>
+                </ImageView>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Button>
+        <Button id="green" mnemonicParsing="false" onAction="#loadHistoryView"
+                stylesheets="@styles.css" text="Score History"/>
+    </VBox>
 </GridPane>

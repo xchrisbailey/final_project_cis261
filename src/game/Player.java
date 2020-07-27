@@ -1,8 +1,8 @@
 package game;
 
 public class Player {
-    public String name;
-    public int score;
+    private String name;
+    private int score;
 
     public Player(String name, int score) {
         this.name = name;
@@ -28,5 +28,9 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void updateScore(int roundScore) {
+        this.score += roundScore;
     }
 }

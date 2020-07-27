@@ -49,7 +49,7 @@ public class GameController extends SceneLoader {
     /** save current round score to current player total and switch players */
     @FXML
     private void bankScore() {
-        currentPlayer.score += currentTurnScore;
+        currentPlayer.updateScore(currentTurnScore);
         updatePlayerScoreboard(currentPlayer);
         updateCurrentTurnScore(0, "reset");
         changePlayer();
@@ -69,7 +69,7 @@ public class GameController extends SceneLoader {
         // check current score status.
         // if 100 or greater save game results and return to dashboard
         if (checkGameStatus()) {
-            currentPlayer.score += currentTurnScore;
+            currentPlayer.updateScore(currentTurnScore);
             saveResults();
             loadScene(e, "winnerScreen.fxml", currentPlayer); // load winner scene
         }
@@ -79,7 +79,7 @@ public class GameController extends SceneLoader {
 
     /** check current game status */
     private boolean checkGameStatus() {
-        return currentPlayer.score + currentTurnScore >= 100;
+        return currentPlayer.getScore() + currentTurnScore >= 100;
     }
 
     /** save current game results to log */
