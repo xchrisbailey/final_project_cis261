@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class WinnerViewController extends SceneLoader {
+public class WinnerController extends SceneLoader {
 
     @FXML private Label winnerNameLabel;
 
@@ -30,6 +30,6 @@ public class WinnerViewController extends SceneLoader {
 
     @FXML
     private void loadDashboard(ActionEvent e) throws IOException {
-        loadScene(e, "dashboard.fxml");
+        loadScene(e, "dashboardScreen.fxml");
     }
 }

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.GameViewController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
+      prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="game.GameController">
     <children>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #000000;">
             <children>
@@ -17,12 +16,12 @@
                     <children>
                         <Label fx:id="playerOneNameLabel" text="Label" textFill="WHITE">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </Label>
                         <Label fx:id="playerOneScoreLabel" text="Label" textFill="#05ff01">
                             <font>
-                                <Font size="38.0" />
+                                <Font size="38.0"/>
                             </font>
                         </Label>
                     </children>
@@ -31,12 +30,12 @@
                     <children>
                         <Label fx:id="playerTwoNameLabel" text="Label" textFill="WHITE">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </Label>
                         <Label fx:id="playerTwoScoreLabel" text="Label" textFill="#05ff01">
                             <font>
-                                <Font size="38.0" />
+                                <Font size="38.0"/>
                             </font>
                         </Label>
                     </children>
@@ -49,43 +48,44 @@
                     <children>
                         <Label fx:id="currentPlayerLabel" text="Label">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label text="Current Score" underline="true" />
+                        <Label text="Current Score" underline="true"/>
                         <Label fx:id="currentPlayerTurnScore" text="label">
                             <font>
-                                <Font size="24.0" />
+                                <Font size="24.0"/>
                             </font>
                         </Label>
                     </children>
                 </VBox>
             </children>
             <VBox.margin>
-                <Insets />
+                <Insets/>
             </VBox.margin>
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
             </padding>
         </HBox>
         <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
             <children>
-                <ImageView fx:id="dieImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                <ImageView fx:id="dieImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                           preserveRatio="true" VBox.vgrow="ALWAYS">
                     <image>
-                        <Image url="@images/1.png" />
+                        <Image url="@images/1.png"/>
                     </image>
                 </ImageView>
                 <HBox alignment="CENTER">
                     <children>
                         <Button fx:id="rollBTN" mnemonicParsing="false" onAction="#rollDie" text="Roll">
                             <HBox.margin>
-                                <Insets right="10.0" />
+                                <Insets right="10.0"/>
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="scoreBankBTN" mnemonicParsing="false" onAction="#bankScore" text="Bank Score" />
+                        <Button fx:id="scoreBankBTN" mnemonicParsing="false" onAction="#bankScore" text="Bank Score"/>
                     </children>
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </padding>
                 </HBox>
             </children>

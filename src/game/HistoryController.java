@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class HistoryViewController extends SceneLoader {
+public class HistoryController extends SceneLoader {
     @FXML private TableView<Result> resultsTable;
     @FXML private TableColumn<Result, StringProperty> dateCol;
     @FXML private TableColumn<Result, StringProperty> playerOneNameCol;
@@ -61,6 +61,6 @@ public class HistoryViewController extends SceneLoader {
 
     @FXML
     private void loadDashboardView(ActionEvent e) throws IOException {
-        loadScene(e, "dashboard.fxml");
+        loadScene(e, "dashboardScreen.fxml");
     }
 }

@@ -8,26 +8,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.WinnerViewController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="game.WinnerController">
     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@images/pig.png" />
+        <Image url="@images/pig.png"/>
     </ImageView>
     <Label fx:id="winnerNameLabel" text="Label" textFill="#00b944">
         <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="36.0"/>
         </font>
     </Label>
-    <Label text="won this game of pig with a score of" />
+    <Label text="won this game of pig with a score of"/>
     <Label fx:id="winnerScoreLabel" text="Label">
         <font>
-            <Font size="36.0" />
+            <Font size="36.0"/>
         </font>
     </Label>
     <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
-        <Button fx:id="closeScreenBTN" mnemonicParsing="false" onAction="#loadDashboard" text="close">
+        <Button id="green" fx:id="closeScreenBTN" mnemonicParsing="false" onAction="#loadDashboard"
+                stylesheets="@styles.css" text="close">
             <HBox.margin>
-                <Insets right="15.0" />
+                <Insets right="15.0"/>
             </HBox.margin>
         </Button>
     </HBox>

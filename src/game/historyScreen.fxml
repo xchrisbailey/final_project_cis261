@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
+            prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="game.HistoryController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="480.0" prefWidth="640.0">
+            <children>
+                <Label contentDisplay="CENTER" text="History View">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </Label>
+                <TableView fx:id="resultsTable" prefHeight="430.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date"/>
+                        <TableColumn fx:id="playerOneNameCol" minWidth="-1.0" prefWidth="95.0" text="Player 1"/>
+                        <TableColumn fx:id="playerOneScoreCol" minWidth="-1.0" prefWidth="99.0" text="Player 1 Score"/>
+                        <TableColumn fx:id="playerTwoNameCol" minWidth="-1.0" prefWidth="75.0" text="Player 2"/>
+                        <TableColumn fx:id="playerTwoScoreCol" minWidth="-1.0" prefWidth="106.0" text="Player 2 Score"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+                <Button id="green" fx:id="dashboardBTN" mnemonicParsing="false" onAction="#loadDashboardView"
+                        stylesheets="@styles.css" text="Back to Dashboard">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0"/>
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

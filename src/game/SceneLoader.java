@@ -42,7 +42,7 @@ public class SceneLoader {
 
         Scene viewScene = new Scene(viewParent);
 
-        GameViewController c = loader.getController();
+        GameController c = loader.getController();
         c.init(p1Name, p2Name);
 
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -66,7 +66,7 @@ public class SceneLoader {
 
         Scene viewScene = new Scene(viewParent);
 
-        WinnerViewController c = loader.getController();
+        WinnerController c = loader.getController();
         c.initData(winner);
 
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();

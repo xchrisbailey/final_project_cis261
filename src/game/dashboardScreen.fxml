@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.DashboardController">
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <VBox alignment="CENTER">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Of PIG" textAlignment="CENTER"
+                      wrappingWidth="640.21435546875">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Text>
+                <Button id="green" fx:id="new_game_btn" contentDisplay="TOP" mnemonicParsing="false"
+                        onAction="#loadGameSetupView" stylesheets="@styles.css" text="New Game">
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/pig.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets bottom="20.0"/>
+                    </VBox.margin>
+                </Button>
+                <Button id="green" fx:id="show_history_btn" mnemonicParsing="false" onAction="#loadHistoryView"
+                        stylesheets="@styles.css" text="Score History"/>
+            </children>
+        </VBox>
+    </children>
+</GridPane>

@@ -1,5 +1,6 @@
 package game;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +13,15 @@ public class GameSetupController extends SceneLoader {
     @FXML private TextField p2Name;
     @FXML private Button loadGameBTN;
 
+    @FXML
+    public void initialize() {
+        loadGameBTN
+                .disableProperty()
+                .bind(
+                        Bindings.isEmpty(p1Name.textProperty())
+                                .or(Bindings.isEmpty(p2Name.textProperty())));
+    }
+
     /**
      * Loads game screen and sends across player one and player two names
      *
@@ -20,6 +30,6 @@ public class GameSetupController extends SceneLoader {
      */
     @FXML
     void loadGame(ActionEvent e) throws IOException {
-        loadScene(e, "gameView.fxml", p1Name.getText(), p2Name.getText());
+        loadScene(e, "gameScreen.fxml", p1Name.getText(), p2Name.getText());
     }
 }

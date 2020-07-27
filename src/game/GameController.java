@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.Random;
 
-public class GameViewController extends SceneLoader {
+public class GameController extends SceneLoader {
     private Player playerOne;
     private Player playerTwo;
     private int currentTurnScore = 0;
@@ -65,7 +65,7 @@ public class GameViewController extends SceneLoader {
         if (checkGameStatus()) {
             currentPlayer.score += currentTurnScore;
             saveResults();
-            loadScene(e, "winnerView.fxml", currentPlayer); // load winner scene
+            loadScene(e, "winnerScreen.fxml", currentPlayer); // load winner scene
         }
 
         if (rollNumber == 1) changePlayer();

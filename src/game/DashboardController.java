@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class Controller extends SceneLoader {
+public class DashboardController extends SceneLoader {
     /**
      * load game history scene
      *
@@ -12,7 +12,7 @@ public class Controller extends SceneLoader {
      * @throws IOException
      */
     public void loadHistoryView(ActionEvent e) throws IOException {
-        loadScene(e, "historyView.fxml");
+        loadScene(e, "historyScreen.fxml");
     }
 
     /**
@@ -22,6 +22,6 @@ public class Controller extends SceneLoader {
      * @throws IOException
      */
     public void loadGameSetupView(ActionEvent e) throws IOException {
-        loadScene(e, "gameSetup.fxml");
+        loadScene(e, "gameSetupScreen.fxml");
     }
 }
