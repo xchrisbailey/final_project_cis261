@@ -27,8 +27,6 @@ public class GameViewController {
     @FXML private Label playerTwoScoreLabel;
     @FXML private Label currentPlayerLabel;
     @FXML private Label currentPlayerTurnScore;
-    //    @FXML private Button rollBTN;
-    //    @FXML private Button scoreBankBTN;
     @FXML private ImageView dieImageView;
 
     public void init(String playerOneName, String playerTwoName) {
@@ -67,7 +65,6 @@ public class GameViewController {
         changeDieFace(new Image(rollNumber + ".png"));
         updateCurrentTurnScore(rollNumber, "update");
 
-        saveResults();
         // check current score status.
         // if 100 or greater save game results and return to dashboard
         if (checkGameStatus()) {
@@ -174,15 +171,15 @@ public class GameViewController {
     private void writeToLogFile(Result results) {
         File logFile = new File("scoreHistory.dat");
         boolean append = logFile.exists();
-
-        try (FileOutputStream fo = new FileOutputStream(logFile, append);
-                AppendableObjectOutputStream ao = new AppendableObjectOutputStream(fo, append)) {
+        try (AppendableObjectOutputStream ao =
+                new AppendableObjectOutputStream(new FileOutputStream(logFile, append), append)) {
             ao.writeObject(results);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /** make object output stream files appendable (HACKY) */
     private static class AppendableObjectOutputStream extends ObjectOutputStream {
         private final boolean append;
         private final boolean initialized;

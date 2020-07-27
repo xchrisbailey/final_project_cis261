@@ -1,11 +1,32 @@
 package game;
 
-import javafx.fxml.Initializable;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class HistoryViewController {
+    ArrayList<Result> results = new ArrayList<Result>();
 
-public class HistoryViewController implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public HistoryViewController() {
+        loadResultFile();
+        results.forEach((r) -> System.out.println(r.toString()));
+    }
+
+    private void loadResultFile() {
+        boolean eof = false;
+        try (ObjectInputStream oi =
+                new ObjectInputStream(new FileInputStream("scoreHistory.dat"))) {
+            while (!eof) {
+                try {
+                    results.add((Result) oi.readObject());
+                } catch (EOFException e) {
+                    eof = true;
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -10,6 +10,24 @@ public class Result implements Serializable {
     int playerOneScore;
     int playerTwoScore;
 
+    @Override
+    public String toString() {
+        return "Result{"
+                + "timestamp="
+                + timestamp
+                + ", playerOneName='"
+                + playerOneName
+                + '\''
+                + ", playerTwoName='"
+                + playerTwoName
+                + '\''
+                + ", playerOneScore="
+                + playerOneScore
+                + ", playerTwoScore="
+                + playerTwoScore
+                + '}';
+    }
+
     public Result(Player playerOne, Player playerTwo) {
         this.playerOneName = playerOne.getName();
         this.playerOneScore = playerOne.getScore();
