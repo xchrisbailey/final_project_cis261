@@ -32,4 +32,9 @@ public class GameSetupController extends SceneLoader {
     void loadGame(ActionEvent e) throws IOException {
         loadScene(e, "gameScreen.fxml", p1Name.getText(), p2Name.getText());
     }
+
+    @FXML
+    private void loadDashboard(ActionEvent e) throws IOException {
+        loadScene(e, "dashboardScreen.fxml");
+    }
 }
