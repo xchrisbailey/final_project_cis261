@@ -48,7 +48,7 @@ public class GameController extends SceneLoader {
 
     /** save current round score to current player total and switch players */
     @FXML
-    private void bankScore() {
+    private void hold() {
         currentPlayer.updateScore(currentTurnScore);
         updatePlayerScoreboard(currentPlayer);
         updateCurrentTurnScore(0, "reset");
@@ -75,6 +75,11 @@ public class GameController extends SceneLoader {
         }
 
         if (rollNumber == 1) changePlayer();
+    }
+
+    @FXML
+    private void quit(ActionEvent e) throws IOException {
+        loadScene(e, "dashboardScreen.fxml");
     }
 
     /** check current game status */
