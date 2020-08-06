@@ -96,7 +96,8 @@ public class GameController extends SceneLoader {
     /**
      * update current round score and set label
      *
-     * @param amount - current roll amount to be added or reset score from
+     * @param amount - current roll amount to be added to score
+     * @param action - reset/update
      */
     private void updateCurrentTurnScore(int amount, String action) {
 
